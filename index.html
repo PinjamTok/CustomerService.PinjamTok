@@ -25,6 +25,12 @@
         margin-bottom: 18px;
         letter-spacing: 0.5px;
       }
+      h2 {
+        color: #003366;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+      }
       p {
         color: #003366;
         font-size: 1.12em;
@@ -50,6 +56,21 @@
         background: #003366;
         color: #fff;
       }
+      .btn-website {
+        padding: 10px 28px;
+        border-radius: 6px;
+        border: 2px solid #28a745;
+        background: #fff;
+        color: #28a745;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        margin-top: 15px;
+      }
+      .btn-website:hover {
+        background: #28a745;
+        color: #fff;
+      }
       .small-note {
         margin-top: 28px;
         color: #555;
@@ -62,6 +83,101 @@
         border-radius: 12px;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,0.07);
       }
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .modal-content {
+        background-color: #f9f9f9;
+        margin: 10% auto;
+        padding: 30px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 6px 30px 0 rgba(0,0,0,0.3);
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      .modal-content h2 {
+        color: #d9534f;
+        margin-top: 0;
+      }
+      .modal-content p {
+        color: #333;
+        line-height: 1.6;
+        font-size: 0.95em;
+        margin: 10px 0;
+        text-align: left;
+      }
+      .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .close-btn:hover {
+        color: #000;
+      }
+      .modal-btn {
+        padding: 10px 20px;
+        background-color: #003366;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 15px;
+        width: 100%;
+        transition: background-color 0.2s;
+      }
+      .modal-btn:hover {
+        background-color: #002244;
+      }
+      .warning-section {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 20px;
+        margin-top: 30px;
+        border-radius: 6px;
+        text-align: left;
+      }
+      .warning-section h2 {
+        color: #856404;
+        margin-top: 0;
+      }
+      .warning-section p {
+        color: #856404;
+        font-size: 0.95em;
+        margin: 8px 0;
+        line-height: 1.5;
+      }
+      .awareness-section {
+        background-color: #d1ecf1;
+        border-left: 4px solid #17a2b8;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 6px;
+        text-align: left;
+      }
+      .awareness-section h2 {
+        color: #0c5460;
+        margin-top: 0;
+      }
+      .awareness-section p {
+        color: #0c5460;
+        font-size: 0.95em;
+        margin: 8px 0;
+        line-height: 1.5;
+      }
     </style>
   </head>
   <body>
@@ -69,7 +185,7 @@
       <!-- LOGO DI SINI -->
       <img
         class="logo"
-        src="data:image/png;base64,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"
+        src="data:image/png;base64,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"
         alt="PinjamTok"
       />
 
@@ -88,12 +204,71 @@
         </a>
       </div>
 
+      <!-- LINK WEBSITE PINJAMTOK -->
+      <a href="https://www.pinjamtok.com" target="_blank">
+        <button class="btn-website">🌐 Lawati Website Kami</button>
+      </a>
+
       <div class="small-note">
         Atau gunakan <b>live chat</b> di penjuru kanan bawah untuk respons segera daripada wakil kami.
+      </div>
+
+      <!-- BAHAGIAN 2: KESEDARAN KEWANGAN -->
+      <div class="awareness-section">
+        <h2>💰 Kesedaran Kewangan</h2>
+        <p>1. Jangan berkongsi maklumat bank atau nombor kad kredit anda dengan siapa pun, termasuk staff sokongan rasmi sekalipun kerana Bank Negara Malaysia tidak akan meminta maklumat sensitif ini melalui WhatsApp atau Telegram.</p>
+        <p>2. Sentiasa semak kadar faedah dan syarat-syarat pinjaman dengan teliti sebelum menandatangani sebarang perjanjian untuk mengelakkan beban hutang yang tidak dijangka.</p>
+        <p>3. Pastikan anda memahami kronologi pembayaran dan tarikh-tarikh penting untuk mengelakkan ketinggalan bayaran yang boleh menjejaskan skor kredit anda.</p>
+        <p>4. Jangan pernah membuat keputusan kewangan secara terburu-buru; ambil masa untuk berfikir dan konsultasi dengan pihak yang berkelayakan jika perlu.</p>
+        <p>5. Simpan semua dokumen pinjaman, resit pembayaran, dan dokumentasi penting dalam tempat yang selamat untuk rujukan dan bukti transaksi anda di masa depan.</p>
+      </div>
+
+      <!-- BAHAGIAN 3: PERINGATAN PENIPUAN -->
+      <div class="warning-section">
+        <h2>⚠️ Peringatan Penipuan & Keselamatan</h2>
+        <p>1. Waspada terhadap panggilan telefon, SMS, atau mesej di media sosial yang mengaku mewakili PinjamTok dan meminta anda untuk membuat pembayaran atau memberikan maklumat peribadi segera.</p>
+        <p>2. Penipu sering menggunakan pautan palsu yang menyerupai laman web rasmi; sentiasa ketik alamat web secara langsung dalam bar alamat dan jangan klik pautan yang diterima melalui mesej tidak dijangka.</p>
+        <p>3. Jadilah berhati-hati dengan tawaran "pinjaman pantas tanpa pemeriksaan" atau "pelepasan hutang ajaib" kerana ini adalah tanda-tanda biasa penipuan yang dirancang untuk mencuri wang dan maklumat anda.</p>
+        <p>4. Jangan pernah mempercayai permintaan untuk membayar yuran pendaftaran atau 'fee' di muka sebelum mendapatkan pinjaman, kerana pemberi pinjaman yang sah tidak akan meminta ini.</p>
+        <p>5. Jika anda mengesyaki penipuan, lapor segera kepada kami melalui live chat atau hubungi pihak berkuasa berkaitan seperti PDRM, Cybersecurity Malaysia, atau Bank Negara Malaysia untuk mendapatkan bantuan.</p>
+      </div>
+    </div>
+
+    <!-- Modal Kesedaran Kewangan -->
+    <div id="financialModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeFinancialModal()">&times;</span>
+        <h2>💰 Kesedaran Kewangan Penting</h2>
+        <p>1. Jangan berkongsi maklumat bank atau nombor kad kredit anda dengan siapa pun, termasuk staff sokongan rasmi sekalipun kerana Bank Negara Malaysia tidak akan meminta maklumat sensitif ini melalui WhatsApp atau Telegram.</p>
+        <p>2. Sentiasa semak kadar faedah dan syarat-syarat pinjaman dengan teliti sebelum menandatangani sebarang perjanjian untuk mengelakkan beban hutang yang tidak dijangka.</p>
+        <p>3. Pastikan anda memahami kronologi pembayaran dan tarikh-tarikh penting untuk mengelakkan ketinggalan bayaran yang boleh menjejaskan skor kredit anda.</p>
+        <p>4. Jangan pernah membuat keputusan kewangan secara terburu-buru; ambil masa untuk berfikir dan konsultasi dengan pihak yang berkelayakan jika perlu.</p>
+        <p>5. Simpan semua dokumen pinjaman, resit pembayaran, dan dokumentasi penting dalam tempat yang selamat untuk rujukan dan bukti transaksi anda di masa depan.</p>
+        <button class="modal-btn" onclick="closeFinancialModal()">Saya Faham</button>
       </div>
     </div>
 
     <!-- Kod Crisp chat widget -->
     <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="d118d2fe-39be-4a53-be79-55f22dec0a0b";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+    <script>
+      // Buka modal kesedaran kewangan semasa halaman load
+      window.onload = function() {
+        document.getElementById("financialModal").style.display = "block";
+      };
+
+      // Tutup modal kesedaran kewangan
+      function closeFinancialModal() {
+        document.getElementById("financialModal").style.display = "none";
+      }
+
+      // Tutup modal jika user klik di luar modal
+      window.onclick = function(event) {
+        var modal = document.getElementById("financialModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
   </body>
 </html>
